@@ -29,11 +29,24 @@ class FamousQuotesViewModel {
     }
     
     func addNewQuote() {
-        let quote = Quote(author: newQuoteAuthor, content: newQuoteContent)
-        quotes.append(quote)
-        QuoteRepository.shared.saveQuote(quote: quote)
+        let quoteToAdd = Quote(author: newQuoteAuthor, content: newQuoteContent)
+        quotes.append(quoteToAdd)
+        QuoteRepository.shared.saveQuote(quote: quoteToAdd)
         newQuoteAuthor = ""
         newQuoteContent = ""
         isShowingAddQuote = false
     }
+    
+    func deleteQuote(quote: Quote) {
+        quotes.removeAll { $0.id == quote.id }
+        QuoteRepository.shared.deleteQuote(quote: quote) { success in
+            if success {
+                print("Successfully deleted quote: \(quote.content)")
+            } else {
+                print("Failed to delete quote.")
+            }
+        }
+    }
+
+    
 }
