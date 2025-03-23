@@ -16,6 +16,11 @@ struct ContentView: View {
                 ForEach(vm.quotes) { quote in
                     Text(quote.content)
                 }
+                .onDelete {indexSet in
+                    for index in indexSet {
+                        let quote = vm.quotes[index]
+                        vm.deleteQuote(quote: quote)
+                    }}
             }
             .onAppear {
                 vm.restoreQuotes()

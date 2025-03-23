@@ -10,7 +10,7 @@ import Foundation
 struct Quote: Identifiable {
     let author: String
     let content: String
-    
+
     var id: String {
         "\(author)\(content)"
     }
